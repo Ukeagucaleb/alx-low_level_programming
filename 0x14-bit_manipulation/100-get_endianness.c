@@ -6,8 +6,12 @@
  */
 int get_endianness(void)
 {
-	unsigned int i = 1;
-	char *c = (char *) &i;
+    union {
+        unsigned int i;
+        char c[sizeof(unsigned int)];
+    } value;
 
-	return (*c);
+    value.i = 1;
+
+    return value.c[0];
 }
